@@ -76,13 +76,14 @@ function Categories() {
     {
       title: "Type",
       dataIndex: "type",
-      key: "type",
+      key: "id",
       render: (text: string, category: Category) => {
         return <Tag color={category.color}>{text.toUpperCase()}</Tag>;
       },
     },
     {
       title: "Action",
+      dataIndex: "id",
       key: "action",
       render: (text: string, category: Category) => (
         <Space size="middle">
@@ -171,7 +172,12 @@ function Categories() {
           ) : null}
         </Modal>
       </div>
-      <Table loading={loading} columns={columns} dataSource={data} />
+      <Table
+        loading={loading}
+        columns={columns}
+        dataSource={data}
+        rowKey="id"
+      />
     </React.Fragment>
   );
 }
