@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom";
-import { Layout, Menu } from "antd";
+import { Layout } from "antd";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
@@ -8,7 +8,7 @@ import Records from "./components/Records";
 import AppHeader from "./components/AppHeader";
 import Logout from "./components/Logout";
 
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 
 function App() {
   return (
