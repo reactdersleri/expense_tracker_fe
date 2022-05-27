@@ -164,7 +164,7 @@ function Categories() {
           <>Are you sure ?</>
         ) : null}
       </Modal>
-      <Table loading={loading} columns={columns} dataSource={data} />
+      <Table loading={loading} columns={columns} dataSource={data} rowKey="id"/>
     </>
   );
 }

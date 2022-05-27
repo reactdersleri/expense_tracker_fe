@@ -1,10 +1,13 @@
 import { Form, Input, Button } from "antd";
+import { useEffect } from "react";
 import { useHistory } from "react-router";
 
 import api from "../utils/api";
 import showError from "../utils/showError";
 
 function SignUp() {
+
+  const token = localStorage.getItem('token');
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -20,12 +23,18 @@ function SignUp() {
       range: "${label} must be between ${min} and ${max}",
     },
   };
+  
+  useEffect(() => {
+    if (token) {
+      history.push("/categories");
+    }
+  }, []);
 
   const history = useHistory();
 
   const onFinish = async (values: any) => {
     try {
-      await api.post("/users/register", values);
+      await api().post("/users/register", values);
       /**
        ** ÇÖZÜLDÜ Eğer api'a giden parametreler zorunlu parametre olmasa bile yanlış keyde gider ise servis 500 hatası verecektir.
        */

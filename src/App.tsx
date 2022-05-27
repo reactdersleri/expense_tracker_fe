@@ -7,7 +7,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Category from "./components/Categories";
 import Records from "./components/Records";
 import AppHeader from "./components/AppHeader";
-import Welcome from "./components/Welcome";
+import Logout from "./components/Logout";
 
 function App() {
   return (
@@ -19,9 +19,9 @@ function App() {
       >
         <Route path="/register" component={SignUp} />
         <Route path="/login" component={Login} />
-        <PrivateRoute path="/welcome" component={Welcome} />
         <PrivateRoute path="/categories" component={Category}/>
         <PrivateRoute path="/records" component={Records}/>
+        <PrivateRoute path="/logout" component={Logout}/>
       </Content>
       <Footer style={{ textAlign: "center" }}>
         Ant Design ©2018 Created by Ant UED

@@ -25,12 +25,36 @@ interface LOGİN_START {
 
 interface LOGİN_SUCCESS {
     type: "LOGİN_SUCCESS";
-    payload : User;
+    payload: User;
 }
 
 interface LOGİN_ERROR {
     type: "LOGİN_ERROR";
 }
 
-export type UserAction = LOGİN_START | LOGİN_SUCCESS | LOGİN_ERROR;
-export type UserDispatch = ThunkDispatch<UserState,void,UserAction>
+interface IS_LOGGED_IN_START {
+    type: "IS_LOGGED_IN_START";
+}
+
+interface IS_LOGGED_IN_SUCCESS {
+    type: "IS_LOGGED_IN_SUCCESS";
+    payload: User;
+}
+
+interface IS_LOGGED_IN_ERROR {
+    type: "IS_LOGGED_IN_ERROR";
+}
+
+interface LOGOUT {
+    type: "LOGOUT";
+}
+
+export type UserAction =
+    | LOGİN_START
+    | LOGİN_SUCCESS
+    | LOGİN_ERROR
+    | IS_LOGGED_IN_START
+    | IS_LOGGED_IN_SUCCESS
+    | IS_LOGGED_IN_ERROR
+    | LOGOUT;
+export type UserDispatch = ThunkDispatch<UserState, void, UserAction>

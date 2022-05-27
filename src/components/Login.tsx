@@ -41,7 +41,7 @@ function Login() {
   
   useEffect(() => {
     if (token) {
-      history.push("/welcome");
+      history.push("/categories");
     }
   }, [data]);
 

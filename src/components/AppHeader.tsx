@@ -1,39 +1,48 @@
 import { Menu } from "antd";
 import { Header } from "antd/lib/layout/layout";
-import { Link, useHistory } from "react-router-dom";
-import { logout } from "../store/actions/userActions";
-
-const token = localStorage.getItem("token");
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+import { AppState } from "../store";
+import { isLoggedIn } from "../store/actions/userActions";
 
 function AppHeader() {
-  const history = useHistory();
+  const { data, loading, error } = useSelector((state: AppState) => state.user);
 
-  const logoutBtn = () => {
-    logout();
-    history.push("/login");
-  };
+  const dispatch = useDispatch();
+
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    dispatch(isLoggedIn());
+  }, []);
+
+  const { pathname } = useLocation();
+
   return (
     <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
       <div className="logo" />
-      <Menu theme="dark" mode="horizontal">
-        {token === null ? (
+      <Menu theme="dark" mode="horizontal" selectedKeys={[pathname]}>
+        {data.username ? (
+          <React.Fragment>
+            <Menu.Item key="/records">
+              <Link to="/records">Harcama Kayıtları</Link>
+            </Menu.Item>
+            <Menu.Item key="/categories">
+              <Link to="/categories">Kategori</Link>
+            </Menu.Item>
+            <Menu.Item key="/logout">
+              <Link to="/logout">Çıkış</Link>
+            </Menu.Item>
+          </React.Fragment>
+        ) : loading ? null : (
           <>
-            <Link to="/login">
-              <Menu.Item key="/login">Giriş Yap</Menu.Item>
-            </Link>
-            <Link to="/register">
-                <Menu.Item key="/register">Kayıt Ol</Menu.Item>
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link to="/categories">
-              <Menu.Item key="/categories">Kategoriler</Menu.Item>
-            </Link>
-            <Link to="/records">
-              <Menu.Item key="/records">Harcama Kayıtlarım</Menu.Item>
-            </Link>
-            <Menu.Item onClick={logoutBtn}>Çıkış Yap</Menu.Item>
+            <Menu.Item key="/login">
+              <Link to="login">Giriş</Link>
+            </Menu.Item>
+            <Menu.Item key="/register">
+              <Link to="register">Kayıt Ol</Link>
+            </Menu.Item>
           </>
         )}
       </Menu>
